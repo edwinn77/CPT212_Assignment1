@@ -34,7 +34,7 @@ public class SimpleMultiplication {
             number.append(digit);
         }
         return number.toString();
-    }
+    }//Time complexity and char big O
     
     private static void multiplyNumbers(String num1, String num2) {
         // Reverse the numbers to start multiplication from the rightmost digit
@@ -53,15 +53,19 @@ public class SimpleMultiplication {
                 int product = (num2.charAt(i) - '0') * (num1.charAt(j) - '0') + carry;
                 partialProducts[i][j] = product % 10; // Store the ones digit as partial product
                 carry = product / 10; // Calculate the new carry
-                carriers[i][j] = carry; // Store the tens digit as carry
+                carriers[i][j] = carry; // Store the tens digit as carry 
             }
         }
+
+
     
         printResults(num1, num2, partialProducts, carriers);
     }
     
 
     private static void printResults(String num1, String num2, int[][] partialProducts, int[][] carriers) {
+
+        BigInteger result = BigInteger.ZERO; // Correct initialization
         // Printing partial products and carriers
         for (int i = 0; i < num2.length(); i++) {
             char multiplierDigit = num2.charAt(i);  // Correct digit from multiplier
@@ -78,5 +82,16 @@ public class SimpleMultiplication {
             }
             System.out.println();
         }
+
+        for (int i = 0; i < num2.length(); i++) {
+            for (int j = 0; j < num1.length(); j++) {
+                // Calculate the value for each digit and carrier, shifted by its position
+                BigInteger baseValue = BigInteger.valueOf(partialProducts[i][j] + carriers[i][j] * 10);
+                BigInteger positionalValue = baseValue.multiply(BigInteger.TEN.pow(i + j));
+                result = result.add(positionalValue);
+            }
+        }
+    
+        System.out.println("The calculated result is: " + result.toString());
     }   
 }
