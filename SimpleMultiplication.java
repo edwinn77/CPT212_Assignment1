@@ -11,7 +11,7 @@ public class SimpleMultiplication {
         // int n = 1 + random.nextInt(9); // Random digit length between 1 and 9
         // // int n = 5; // Example digit length, you can change this based on your requirements
 
-        for(int n = 1; n < 20; n++) {
+        for(int n = 1; n < 31; n++) {
             // Generate random numbers of n digits
                 String num1 = generateRandomNumber(n);
                 String num2 = generateRandomNumber(n);
@@ -19,7 +19,9 @@ public class SimpleMultiplication {
                 // String num1 = "12346"; // Example number 1
                 // String num2 = "54321"; // Example number 2
 
-                System.out.println("Multiplying " + num1 + " and " + num2);
+                System.out.println("X " + n + ": " + num1);
+                System.out.println("Y " + n + ": " + num2);
+                System.out.println("=================================================================\n");
                 multiplyNumbers(num1, num2);
 
                 // Using BigInteger to handle large integer calculations
@@ -27,8 +29,8 @@ public class SimpleMultiplication {
                 BigInteger bigNum2 = new BigInteger(num2);
                 BigInteger result = bigNum1.multiply(bigNum2);
 
-                System.out.println("The result for the multiplication of " + n + " digit of number is: " + result);
-                System.out.println("The number of primitive operations is: " + primitiveOperationCounter);
+                System.out.println("Expected " + n + ": " + result);
+                System.out.println("Total number of primitive operations: " + primitiveOperationCounter);
                 System.out.println();
                 System.out.println();
                 primitiveOperationCounter = 0; // Reset the counter for the next run
@@ -137,6 +139,7 @@ public class SimpleMultiplication {
             }
         }
     
-        System.out.println("The calculated result is: " + result.toString());
+        System.out.println("=================================================================\n");
+        System.out.println("Actual " + num1.length() + ": " + result.toString());
     }   
 }
